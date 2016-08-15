@@ -14,3 +14,4 @@ print len(test_scrape) - len(output_read)
 
 # Clean up
 os.remove('test.csv')
+print 'Test completed\n'
