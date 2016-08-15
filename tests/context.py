@@ -3,6 +3,6 @@
 import sys
 import os
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__),
-                '/Users/Ryan/Github/SIC-list/scrape_sic')))
+                '../scrape_sic')))
 
 import scrape_sic_sec
