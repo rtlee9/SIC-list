@@ -21,3 +21,11 @@ There are a number of online sources that provide SIC codes and descriptions, th
 * Machine readable data
 
 Taken together, these are important for assessing data quality and reliability. The purpose of this repository is to provide SIC codes in adherence with these standards.
+
+## Usage
+
+1. Install Python (TODO: clarify versions)
+1. Call function `get_SIC_SEC` with one argument: the name of the output file
+
+## License
+GNU GPLv3
