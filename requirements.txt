@@ -1,4 +1,1 @@
-BeautifulSoup==4.5.1
-urllib2==2.7.9
-csv==2.3
-warnings==2.1
+beautifulsoup4==4.5.1
