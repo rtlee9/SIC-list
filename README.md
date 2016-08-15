@@ -22,10 +22,10 @@ There are a number of online sources that provide SIC codes and descriptions, th
 
 Taken together, these are important for assessing data quality and reliability. The purpose of this repository is to provide SIC codes in adherence with these standards.
 
-## Usage
+## Usage (Work in Progress)
 
 1. Install Python (TODO: clarify versions)
-1. Call function `get_SIC_SEC` with one argument: the name of the output file
+1. Call function `get_SIC_SEC()` with the desired name of the CSV output file
 
 ## License
 GNU GPLv3
