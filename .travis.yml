@@ -6,15 +6,12 @@ python:
 
 # command to install dependencies
 install:
-  - pip install flake8
-  - pip install coveralls
   - pip install -r requirements.txt --download-cache $HOME/.pip-cache
 
 # command to run tests
 script:
+  - py.test --cov=scrape_sic tests/
   - flake8 --statistics --show-source --disable-noqa scrape_sic
-  - coverage run scrape_sic/scrape_sic_sec.py test
-  - nosetests
 
 after_success:
   - coveralls
