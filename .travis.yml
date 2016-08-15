@@ -1,5 +1,6 @@
 sudo: false
 language: python
+cache: pip
 python:
   - 2.7
 
@@ -11,9 +12,9 @@ install:
 
 # command to run tests
 script:
-  - flake8 --statistics --show-source --disable-noqa
+  - flake8 --statistics --show-source --disable-noqa scrape_sic
   - coverage run scrape_sic/scrape_sic_sec.py test
   - nosetests
 
 after_success:
-  coveralls
+  - coveralls
