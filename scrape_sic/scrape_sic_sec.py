@@ -4,7 +4,7 @@ import csv
 import warnings
 
 
-def get_SIC_SEC(out_file):
+def get_sic_sec(out_file):
 
     # Setup
     url = 'https://www.sec.gov/info/edgar/siccodes.htm'
@@ -36,5 +36,3 @@ def get_SIC_SEC(out_file):
     # Print confirmation and return data
     print 'Table written to ' + out_file
     return data
-
-SIC = get_SIC_SEC(out_file='SIC_SEC.csv')
