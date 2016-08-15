@@ -11,6 +11,7 @@ import scrape_sic_sec
 test_scrape = scrape_sic_sec.get_sic_sec('test.csv')
 output_read = pd.read_csv('test.csv')
 print len(test_scrape) - len(output_read)
+print test_scrape[300][2]
 
 # Clean up
 os.remove('test.csv')
