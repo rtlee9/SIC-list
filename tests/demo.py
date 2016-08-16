@@ -10,8 +10,12 @@ import scrape_sic_sec
 # Test scrape
 test_scrape = scrape_sic_sec.get_sic_sec('test.csv')
 output_read = pd.read_csv('test.csv')
-print len(test_scrape) - len(output_read)
-print test_scrape[300][2]
+print len(test_scrape) - len(output_read.index)
+
+# Convert to dataframe
+df = pd.DataFrame(test_scrape)
+df.columns = df.iloc[0]
+print list(df.columns.values)
 
 # Clean up
 os.remove('test.csv')
