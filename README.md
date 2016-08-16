@@ -25,10 +25,13 @@ There are a number of online sources that provide SIC codes and descriptions, th
 
 Taken together, these are important for assessing data quality and reliability. The purpose of this repository is to provide SIC codes in adherence with these standards.
 
-## Usage (Work in Progress)
+## Usage
 
-1. Install Python (TODO: clarify versions)
-1. Call function `get_SIC_SEC()` with the desired name of the CSV output file
+The latest data can be found in the root directory. To refresh:
+1. Install Python 2.7
+1. Install python requirements: `$ pip install -r requirements.txt`
+1. Import package `scrape_sic`
+1. Call `scrape_sic.scrape_sic_sec(output_file)` where `output_file` is the name of the csv file to be saved
 
 ## License
-GNU GPLv3
+[Apache License 2.0](http://choosealicense.com/licenses/apache-2.0/)
