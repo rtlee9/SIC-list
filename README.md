@@ -28,6 +28,7 @@ Taken together, these are important for assessing data quality and reliability. 
 ## Usage
 
 The latest data can be found in the root directory. To refresh:
+
 1. Install Python 2.7
 1. Install python requirements: `$ pip install -r requirements.txt`
 1. Import package `scrape_sic`
