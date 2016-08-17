@@ -8,10 +8,17 @@ ind_group = namedtuple('ind_group', [
 
 def clean_desc(full_desc):
     full_desc_split = full_desc.split(': ')
-    code_split = full_desc_split.split(' ')
+    if len(full_desc_split) < 2:
+        raise Exception('No \':\' delimiter found')
+    elif len(full_desc_split) > 2:
+        raise Exception('More than one \':\' delimiter found')
+
+    code_split = full_desc_split[0].split(' ')
     code = code_split[len(code_split) - 1]
-    code_type = ' '.join(code_split[len(code_split) - 1])
-    return [code, code_type]
+    code_type = ' '.join(code_split[:-1])
+    code_desc = full_desc_split[1]
+
+    return [code, code_type, code_desc]
 
 
 def get_divisions():
