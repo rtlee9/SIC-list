@@ -4,7 +4,7 @@ import sys
 import pandas as pd
 
 sys.path.insert(0, os.path.abspath(
-    '/Users/Ryan/Github/SIC-list/scrape_sic'))
+    'scrape_sic'))
 import scrape_sic_sec
 
 # Test scrape
