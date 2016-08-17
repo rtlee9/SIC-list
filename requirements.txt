@@ -1,3 +1,4 @@
+setuptools==25.2.0
 beautifulsoup4==4.5.1
 configparser==3.5.0
 coverage==4.2
