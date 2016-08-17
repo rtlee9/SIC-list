@@ -9,6 +9,9 @@ notifications:
     on_success: never
     on_failure: change
 
+before_install:
+  - pip install setuptools==25.2.0
+
 # command to install dependencies
 install:
   - pip install -r requirements.txt --download-cache $HOME/.pip-cache
