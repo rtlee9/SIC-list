@@ -28,43 +28,23 @@ def get_divisions():
 
     # Store cleaned aref elements
     divisions = []
-    for i in range(1, len(all_links) - 1):
+    for i in range(0, len(all_links) - 1):
         l = all_links[i]
         full_desc = str(l.contents[0])
         link = l.get('href')
 
+        print i
         if (i > 0) & (full_desc.split(' ')[0] == 'Major'):
-            prior_desc = str(all_links[i - 1].contents[0])
-            if prior_desc.split(' ')[0] == 'Division':
-                parent_desc = str(all_links[i - 1].contents[0])
-            elif prior_desc.split(' ')[0] == 'Major':
-                parent_desc = divisions[i - 2].parent_desc
+            prior = divisions[i - 1]
+            print prior
+            if prior.full_desc.split(' ')[0] == 'Division':
+                parent_desc = str(prior.full_desc)
+            elif prior.full_desc.split(' ')[0] == 'Major':
+                parent_desc = str(prior.parent_desc)
             else:
                 raise ValueError('Unexpected code type')
         else:
-            parent_desc = None
+            parent_desc = str(None)
         divisions.append(ind_group(full_desc, parent_desc, link))
 
     return divisions
-
-
-def get_major():
-
-    # Setup
-    url = 'https://www.osha.gov/pls/imis/sic_manual.display?id=1&tab=group'
-    page = urllib2.urlopen(url).read()
-    soup = BeautifulSoup(page, 'html5lib')
-
-    # Find content
-    container = soup.select('div#maincontain')[0]
-    groups = container.find_all(['strong', 'li'])
-
-    for g in groups:
-        if g.name == 'strong':
-            full_desc = g.contents[0]
-        if g.name == 'li':
-            full_desc = 'SIC4 ' + str(g.contents[0]).strip() + \
-                ': ' + str(g.contents[1].contents[0])
-
-
-get_major()

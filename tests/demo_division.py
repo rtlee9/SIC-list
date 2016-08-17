@@ -9,4 +9,4 @@ import scrape_sic_osha as scrape
 divisions = scrape.get_divisions()
 
 for d in divisions:
-    print str(d.parent_desc) + d.full_desc 
+    print str(d.parent_desc) + d.full_desc
