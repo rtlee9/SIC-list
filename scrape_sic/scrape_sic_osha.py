@@ -37,7 +37,7 @@ def get_divisions():
     divisions = []
     for i in range(0, len(all_links) - 1):
         l = all_links[i]
-        full_desc = str(l.contents[0])
+        full_desc = str(l.contents[0]).strip()
         link = l.get('href')
 
         print i
@@ -84,11 +84,11 @@ def get_major(relative_links=False):
 
         # Get description
         if g.name == 'strong':
-            full_desc = g.contents[0]
+            full_desc = g.contents[0].strip()
             link = None
         elif g.name == 'li':
             full_desc = 'SIC4 ' + str(g.contents[0]).strip() + \
-                ': ' + str(g.contents[1].contents[0])
+                ': ' + str(g.contents[1].contents[0]).strip()
             link = g.contents[1].get('href')
         else:
             raise ValueError('Unexpected element type: ' + g.name)
