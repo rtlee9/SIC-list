@@ -1,20 +1,18 @@
 engines:
-  rubocop:
+  radon:
     enabled: true
-  brakeman:
-    enabled: true
-  eslint:
-    enabled: true
-  csslint:
+  pep8:
     enabled: true
   duplication:
     enabled: true
     config:
       languages:
       - python
+
 ratings:
   paths:
   - scrape_sic/**
+
 exclude_paths:
 - tests/**/*
 - venv/**/*
