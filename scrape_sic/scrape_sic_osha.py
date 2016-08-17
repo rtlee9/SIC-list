@@ -46,3 +46,25 @@ def get_divisions():
         divisions.append(ind_group(full_desc, parent_desc, link))
 
     return divisions
+
+
+def get_major():
+
+    # Setup
+    url = 'https://www.osha.gov/pls/imis/sic_manual.display?id=1&tab=group'
+    page = urllib2.urlopen(url).read()
+    soup = BeautifulSoup(page, 'html5lib')
+
+    # Find content
+    container = soup.select('div#maincontain')[0]
+    groups = container.find_all(['strong', 'li'])
+
+    for g in groups:
+        if g.name == 'strong':
+            full_desc = g.contents[0]
+        if g.name == 'li':
+            full_desc = 'SIC4 ' + str(g.contents[0]).strip() + \
+                ': ' + str(g.contents[1].contents[0])
+
+
+get_major()
