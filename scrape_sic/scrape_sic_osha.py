@@ -35,15 +35,13 @@ def get_divisions():
 
     # Store cleaned aref elements
     divisions = []
-    for i in range(0, len(all_links) - 1):
+    for i in range(0, len(all_links)):
         l = all_links[i]
         full_desc = str(l.contents[0]).strip()
         link = l.get('href')
 
-        print i
         if (i > 0) & (full_desc.split(' ')[0] == 'Major'):
             prior = divisions[i - 1]
-            print prior
             if prior.full_desc.split(' ')[0] == 'Division':
                 parent_desc = str(prior.full_desc)
             elif prior.full_desc.split(' ')[0] == 'Major':
@@ -78,7 +76,7 @@ def get_major(relative_links=False):
     groups = container.find_all(['strong', 'li'])
 
     majors = []
-    for i in range(0, len(groups) - 1):
+    for i in range(0, len(groups)):
 
         g = groups[i]
 
