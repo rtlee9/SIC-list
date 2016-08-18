@@ -105,11 +105,11 @@ def save_divisions(fname='divisions_raw.pkl'):
     divisions = get_divisions()
     with open(fname, 'w') as f:
         pickle.dump(divisions, f)
-    return True
+    return divisions
 
 
 def save_majors(url, fname='majors_raw.pkl'):
     majors = get_major(url)
     with open(fname, 'w') as f:
         pickle.dump(majors, f)
-    return True
+    return majors

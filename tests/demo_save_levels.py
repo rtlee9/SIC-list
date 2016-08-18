@@ -8,9 +8,10 @@ import scrape_sic_osha as scrape
 
 
 fname = 'test_div_raw.pkl'
-print scrape.save_divisions(fname)
+scrape.save_divisions(fname)
 os.remove(fname)
 
+url = 'https://www.osha.gov/pls/imis/sic_manual.display?id=1&tab=group'
 fname = 'test_maj_raw.pkl'
-print scrape.save_majors(fname)
+scrape.save_majors(url, fname)
 os.remove(fname)
