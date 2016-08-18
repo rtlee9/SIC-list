@@ -8,8 +8,9 @@ sys.path.insert(0, os.path.abspath(
 import scrape_sic_sec
 
 # Test scrape
-test_scrape = scrape_sic_sec.get_sic_sec('test.csv')
-output_read = pd.read_csv('test.csv')
+fname = 'test.csv'
+test_scrape = scrape_sic_sec.save_sic_sec(fname)
+output_read = pd.read_csv(fname)
 print len(test_scrape) - len(output_read.index)
 
 # Convert to dataframe

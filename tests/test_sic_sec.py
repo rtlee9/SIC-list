@@ -7,7 +7,7 @@ class TestClass:
 
     # Test scrape
     out_name = 'test.csv'
-    data = scrape.get_sic_sec(out_name)
+    data = scrape.save_sic_sec(out_name)
     output_read = pd.read_csv(out_name)
     df = pd.DataFrame(data)
     df.columns = df.iloc[0]
