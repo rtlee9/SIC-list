@@ -40,11 +40,11 @@ def get_divisions():
         full_desc = str(l.contents[0]).strip()
         link = l.get('href')
 
-        if (i > 0) & (full_desc.split(' ')[0] == 'Major'):
+        if (i > 0) & (clean_desc(full_desc)[1] == 'Major Group'):
             prior = divisions[i - 1]
-            if prior.full_desc.split(' ')[0] == 'Division':
+            if clean_desc(prior.full_desc)[1] == 'Division':
                 parent_desc = str(prior.full_desc)
-            elif prior.full_desc.split(' ')[0] == 'Major':
+            elif clean_desc(prior.full_desc)[1] == 'Major Group':
                 parent_desc = str(prior.parent_desc)
             else:
                 raise ValueError('Unexpected code type')
@@ -92,11 +92,11 @@ def get_major(relative_links=False):
             raise ValueError('Unexpected element type: ' + g.name)
 
         # Get parent element
-        if (i > 0) & (full_desc.split(' ')[0] == 'SIC4'):
+        if (i > 0) & (clean_desc(full_desc)[1] == 'SIC4'):
             prior = majors[i - 1]
-            if prior.full_desc.split(' ')[0] == 'Industry':
+            if clean_desc(prior.full_desc)[1] == 'Industry Group':
                 parent_desc = str(prior.full_desc)
-            elif prior.full_desc.split(' ')[0] == 'SIC4':
+            elif clean_desc(prior.full_desc)[1] == 'SIC4':
                 parent_desc = str(prior.parent_desc)
             else:
                 err_msg = 'Unexpected code type: ' + prior
