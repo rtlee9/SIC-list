@@ -1,6 +1,7 @@
 from bs4 import BeautifulSoup
 import urllib2
 from collections import namedtuple
+import pickle
 
 ind_group = namedtuple('ind_group', [
     'full_desc', 'parent_desc', 'link'])
@@ -98,3 +99,17 @@ def get_major(url):
         majors.append(ind_group(full_desc, parent_desc, link))
 
     return majors
+
+
+def save_divisions(fname='divisions_raw.pkl'):
+    divisions = get_divisions()
+    with open(fname, 'w') as f:
+        pickle.dump(divisions, f)
+    return True
+
+
+def save_majors(url, fname='majors_raw.pkl'):
+    majors = get_major(url)
+    with open(fname, 'w') as f:
+        pickle.dump(majors, f)
+    return True
