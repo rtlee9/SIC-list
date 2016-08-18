@@ -55,17 +55,7 @@ def get_divisions():
     return divisions
 
 
-def get_major(relative_links=False):
-
-    # Setup
-    base_url = 'https://www.osha.gov/pls/imis/'
-    url_ext = 'https://www.osha.gov/pls/imis/sic_manual.display?id=1&tab=group'
-    if relative_links:
-        url = base_url + url_ext
-    elif ~relative_links:
-        url = url_ext
-    else:
-        raise ValueError('Unexpcted data type relative_links')
+def get_major(url):
 
     # Read site
     page = urllib2.urlopen(url).read()
