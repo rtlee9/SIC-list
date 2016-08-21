@@ -14,8 +14,13 @@ class TestClass:
             scrape.clean_desc('thistaghasnospace')
 
     def test_multcol(self):
-        with pytest.raises(Exception):
-            scrape.clean_desc('Element : with: multiplcols')
+        mult_str = 'Industry Group 271: Newspapers: Publishing, ' + \
+            'Or Publishing And Printing'
+        with pytest.warns(UserWarning):
+            clean = scrape.clean_desc(mult_str)
+        assert clean[0] == '271'
+        assert clean[1] == 'Industry Group'
+        assert clean[2] == 'Newspapers: Publishing, Or Publishing And Printing'
 
     def test_division(self):
         clean = scrape.clean_desc(

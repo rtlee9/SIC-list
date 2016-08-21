@@ -2,6 +2,7 @@ from bs4 import BeautifulSoup
 import urllib2
 from collections import namedtuple
 import pickle
+import warnings
 
 ind_group = namedtuple('ind_group', [
     'full_desc', 'parent_desc', 'link'])
@@ -10,9 +11,15 @@ ind_group = namedtuple('ind_group', [
 def clean_desc(full_desc):
     full_desc_split = full_desc.split(': ')
     if len(full_desc_split) < 2:
-        raise Exception('No \':\' delimiter found')
+        raise Exception('No \':\' delimiter found:\n' + full_desc)
     elif len(full_desc_split) > 2:
-        raise Exception('More than one \':\' delimiter found')
+        new_list = []
+        new_list.append(full_desc_split[0])
+        new_list.append(': '.join(full_desc_split[1:]))
+        full_desc_split = new_list
+        warnings.warn(
+            'More than one \':\' delimiter found, '
+            'using the first delimiter to split:\n' + full_desc, UserWarning)
 
     code_split = full_desc_split[0].split(' ')
     code = code_split[len(code_split) - 1]
