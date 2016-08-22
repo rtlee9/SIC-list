@@ -2,6 +2,8 @@
 
 [![Build Status](https://travis-ci.org/rtlee9/SIC-list.svg?branch=master)](https://travis-ci.org/rtlee9/SIC-list)
 [![Coverage Status](https://coveralls.io/repos/github/rtlee9/SIC-list/badge.svg?branch=)](https://coveralls.io/github/rtlee9/SIC-list?branch=)
+[![license](https://img.shields.io/badge/license-Apache_License-blue.svg)](LICENSE)
+[![PyPI](https://img.shields.io/badge/python-2.7-blue.svg)](https://www.python.org/download/releases/2.7/)
 
 The Standard Industrial Classification (SIC) is a system used to classify businesses by their primary business activity, or industry. The SIC system was created in the 1930's and has since been [replaced](https://www.census.gov/eos/www/naics/faqs/faqs.html#q8) as the industry classification system for Federal statistical agencies; however, it is still widely used by many businesses and by some government agencies.
 
