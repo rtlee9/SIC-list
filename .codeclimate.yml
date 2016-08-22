@@ -16,4 +16,5 @@ ratings:
 exclude_paths:
 - tests/**/*
 - venv/**/*
+- HTML_copies/**/*
 - "**/vendor/**/*"
