@@ -116,3 +116,16 @@ def save_majors(url, fname='majors_raw.pkl'):
     with open(fname, 'w') as f:
         pickle.dump(majors, f)
     return majors
+
+
+def save_all_majors(fname_prepend='Maj_'):
+    divisions = get_divisions()
+    file_list = []
+    for d in divisions:
+        desc = clean_desc(d.full_desc)
+        if desc[1] == 'Major Group':
+            ulr = 'https://www.osha.gov/pls/imis/' + d.link
+            filename = fname_prepend + desc[0] + '.pkl'
+            save_majors(ulr, fname=filename)
+            file_list.append(filename)
+    return file_list
