@@ -10,3 +10,4 @@ filter:
         - '*.min.js'
         - 'venv/*'
         - 'HTML_copies/*'
+        - 'tests/*'
