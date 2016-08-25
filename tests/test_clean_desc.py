@@ -16,8 +16,7 @@ class TestClass:
     def test_multcol(self):
         mult_str = 'Industry Group 271: Newspapers: Publishing, ' + \
             'Or Publishing And Printing'
-        with pytest.warns(UserWarning):
-            clean = scrape.clean_desc(mult_str)
+        clean = scrape.clean_desc(mult_str)
         assert clean[0] == '271'
         assert clean[1] == 'Industry Group'
         assert clean[2] == 'Newspapers: Publishing, Or Publishing And Printing'
