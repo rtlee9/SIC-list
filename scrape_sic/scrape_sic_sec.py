@@ -28,7 +28,7 @@ def get_sic_sec():
     return data
 
 
-def save_sic_sec(out_fname):
+def save_sic_sec(out_fname='sec_combined.csv'):
     data = get_sic_sec()
     with open(out_fname, 'wb') as myfile:
         wr = csv.writer(myfile, quoting=csv.QUOTE_ALL)
