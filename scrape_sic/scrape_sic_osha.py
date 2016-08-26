@@ -42,8 +42,8 @@ def get_divisions():
     divisions = []
     for i in range(0, len(all_links)):
         l = all_links[i]
-        full_desc = str(l.contents[0]).strip()
-        link = l.get('href')
+        full_desc = str(l.contents[0]).strip().encode("utf-8")
+        link = l.get('href').encode("utf-8")
 
         if (i > 0) & (clean_desc(full_desc)[1] == 'Major Group'):
             prior = divisions[i - 1]
@@ -79,12 +79,12 @@ def get_major(url_ext):
 
         # Get description
         if g.name == 'strong':
-            full_desc = g.contents[0].strip()
+            full_desc = g.contents[0].strip().encode("utf-8")
             link = None
         elif g.name == 'li':
             full_desc = 'SIC4 ' + str(g.contents[0]).strip() + \
                 ': ' + str(g.contents[1].contents[0]).strip()
-            link = g.contents[1].get('href')
+            link = g.contents[1].get('href').encode("utf-8")
         else:
             raise ValueError('Unexpected element type: ' + g.name)
 
