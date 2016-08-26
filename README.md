@@ -7,6 +7,9 @@
 [![license](https://img.shields.io/badge/license-Apache_License-blue.svg)](LICENSE)
 [![PyPI](https://img.shields.io/badge/python-2.7-blue.svg)](https://www.python.org/download/releases/2.7/)
 
+This repo provides lists of four-digit SIC codes scraped from the websites of two government agencies: the [SEC](https://www.sec.gov/info/edgar/siccodes.htm) and [OSHA](https://www.osha.gov/pls/imis/sic_manual.html). The cleaned lists can be found [here](sec_combined.csv) and [here](osha_combined.csv), respectively, and refresh instructions can be found below.
+
+## Background
 The Standard Industrial Classification (SIC) is a system used to classify businesses by their primary business activity, or industry. The SIC system was created in the 1930's and has since been [replaced](https://www.census.gov/eos/www/naics/faqs/faqs.html#q8) as the industry classification system for Federal statistical agencies; however, it is still widely used by many businesses and by some government agencies.
 
 ## Authoritative sources
@@ -35,8 +38,7 @@ The latest data can be found in the root directory. To refresh:
 
 1. Install Python 2.7
 1. Install python requirements: `$ pip install -r requirements.txt`
-1. Import package `scrape_sic`
-1. Call `scrape_sic.scrape_sic_sec(output_file)` where `output_file` is the name of the csv file to be saved
+1. From the command line run `$ python get_sic.py`
 
 ## License
 [Apache License 2.0](http://choosealicense.com/licenses/apache-2.0/)
