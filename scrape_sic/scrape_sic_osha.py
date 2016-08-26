@@ -169,9 +169,9 @@ def combine_sic_all(divisions, majors_all):
 
             # Store cleaned codes and descriptions
             cols = clean_out(sic)
-            cols.extend(ind)
-            cols.extend(maj)
-            cols.extend(div)
+            cols.extend(clean_out(ind))
+            cols.extend(clean_out(maj))
+            cols.extend(clean_out(div))
 
             wide.append(cols)
 
