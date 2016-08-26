@@ -69,6 +69,7 @@ def get_major(url_ext):
     # Find content
     container = soup.select('div#maincontain')[0]
     groups = container.find_all(['strong', 'li'])
+    major_desc = str(container.find_all('h2')[0].contents[0])
 
     majors = []
     for i in range(0, len(groups)):
@@ -97,7 +98,7 @@ def get_major(url_ext):
                 err_msg = 'Unexpected code type: ' + prior
                 raise ValueError(err_msg)
         else:
-            parent_desc = str(None)
+            parent_desc = major_desc
 
         # Save to named tuple
         majors.append(ind_group(full_desc, parent_desc, link))

@@ -20,7 +20,7 @@ class TestClass:
         assert self.major[0].full_desc == \
             'Industry Group 011: Cash Grains'
         assert self.major[0].parent_desc == \
-            'None'
+            'Major Group 01: Agricultural Production Crops'
 
     def test_last(self):
         assert self.major[len(self.major) - 1].full_desc == \
