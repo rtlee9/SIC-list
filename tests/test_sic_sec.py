@@ -16,25 +16,25 @@ class TestClass:
         assert len(self.data) - len(self.output_read) == 1
 
     def test_headers(self):
-        assert self.data[0] == ['SIC4', 'AD_office', 'industry_title']
+        assert self.data[0] == ['SIC4_cd', 'AD_office', 'industry_title']
 
     def test_df_headers(self):
         assert list(self.df.columns.values) == \
-            ['SIC4', 'AD_office', 'industry_title']
+            ['SIC4_cd', 'AD_office', 'industry_title']
 
     def test_5122(self):
         assert self.df[pd.to_numeric(
-            self.df.SIC4, errors='coerce') == 8071].industry_title.iloc[0] == \
+            self.df.SIC4_cd, errors='coerce') == 8071].industry_title.iloc[0] == \
             'SERVICES-MEDICAL LABORATORIES'
 
     def test_0800(self):
         assert self.df[pd.to_numeric(
-            self.df.SIC4, errors='coerce') == 800].industry_title.iloc[0] == \
+            self.df.SIC4_cd, errors='coerce') == 800].industry_title.iloc[0] == \
             'FORESTRY'
 
     def test_3540(self):
         assert self.df[pd.to_numeric(
-            self.df.SIC4, errors='coerce') == 3540].industry_title.iloc[0] == \
+            self.df.SIC4_cd, errors='coerce') == 3540].industry_title.iloc[0] == \
             'METALWORKG MACHINERY & EQUIPMENT'
 
     # Clean up

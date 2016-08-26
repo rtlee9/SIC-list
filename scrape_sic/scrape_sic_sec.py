@@ -23,7 +23,7 @@ def get_sic_sec():
     # Clean headers
     if data[0] != ['SICCode', 'A/D \xc2\xa0Office', 'Industry Title']:
         warnings.warn('Warning: column names have changed in ULR ' + url)
-    data[0] = ['SIC4', 'AD_office', 'industry_title']
+    data[0] = ['SIC4_cd', 'AD_office', 'industry_title']
 
     return data
 
