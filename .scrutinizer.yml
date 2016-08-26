@@ -1,0 +1,13 @@
+checks:
+    python:
+        code_rating: true
+        duplicate_code: true
+    javascript: true
+
+filter:
+    excluded_paths:
+        - '*/test/*'
+        - '*.min.js'
+        - 'venv/*'
+        - 'HTML_copies/*'
+        - 'tests/*'
