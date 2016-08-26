@@ -1,0 +1,20 @@
+engines:
+  radon:
+    enabled: true
+  pep8:
+    enabled: true
+  duplication:
+    enabled: true
+    config:
+      languages:
+      - python
+
+ratings:
+  paths:
+  - scrape_sic/**
+
+exclude_paths:
+- tests/**/*
+- venv/**/*
+- HTML_copies/**/*
+- "**/vendor/**/*"
