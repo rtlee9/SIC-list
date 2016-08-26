@@ -1,4 +1,4 @@
-# SIC codes -- open source edition
+# SIC codes for download -- open source edition
 
 [![Build Status](https://travis-ci.org/rtlee9/SIC-list.svg?branch=master)](https://travis-ci.org/rtlee9/SIC-list)
 [![Coverage Status](https://coveralls.io/repos/github/rtlee9/SIC-list/badge.svg?branch=)](https://coveralls.io/github/rtlee9/SIC-list?branch=)
