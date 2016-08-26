@@ -2,6 +2,7 @@ from bs4 import BeautifulSoup
 import urllib2
 from collections import namedtuple
 import pickle
+import csv
 
 ind_group = namedtuple('ind_group', [
     'full_desc', 'parent_desc', 'link'])
@@ -106,6 +107,17 @@ def get_major(url_ext):
     return majors
 
 
+def get_all_majors():
+    divisions = get_divisions()
+    majors_all = []
+    for d in divisions:
+        desc = clean_desc(d.full_desc)
+        if desc[1] == 'Major Group':
+            majors = get_major(d.link)
+            majors_all.extend(majors)
+    return majors_all
+
+
 def save_divisions(fname='divisions_raw.pkl'):
     divisions = get_divisions()
     with open(fname, 'w') as f:
@@ -130,3 +142,70 @@ def save_all_majors(fname_prepend='Maj_'):
             save_majors(d.link, fname=filename)
             file_list.append(filename)
     return file_list
+
+
+def get_sic_all(div_fname=None, maj_fnames=None, out_fname='osha_combined'):
+
+    # Get divisions if file not provided
+    if div_fname:
+        divisions = pickle.load(open(div_fname, 'rb'))
+    else:
+        divisions = get_divisions()
+
+    # Get major lists if files not provided
+    if maj_fnames:
+        majors_all = []
+        for f in maj_fnames:
+            majors_all.extend(pickle.load(open(f, 'rb')))
+    else:
+        majors_all = get_all_majors()
+
+    combined = list(majors_all)
+    combined.extend(divisions)
+    d_combined = {c.full_desc: c for c in combined}
+
+    sic = [c for c in combined if clean_desc(c.full_desc)[1] == 'SIC4']
+    wide = []
+    for sic in combined:
+        sic_fdesc = clean_desc(sic.full_desc)
+        if sic_fdesc[1] == 'SIC4':
+
+            # Clean SIC4
+            SIC4_cd = sic_fdesc[0]
+            SIC4_desc = sic_fdesc[2]
+
+            # Clean industry
+            ind = d_combined[sic.parent_desc.strip()]
+            ind_fdesc = clean_desc(ind.full_desc)
+            ind_cd = ind_fdesc[0]
+            ind_desc = ind_fdesc[2]
+
+            # Clean major
+            maj = d_combined[ind.parent_desc.strip()]
+            maj_fdesc = clean_desc(maj.full_desc)
+            maj_cd = maj_fdesc[0]
+            maj_desc = maj_fdesc[2]
+
+            # Clean division
+            div = d_combined[maj.parent_desc.strip()]
+            div_fdesc = clean_desc(div.full_desc)
+            div_cd = div_fdesc[0]
+            div_desc = div_fdesc[2]
+
+            wide.append((SIC4_cd, SIC4_desc, ind_cd, ind_desc,
+                         maj_cd, maj_desc, div_cd, div_desc))
+
+            # Save data
+            with open(out_fname + '.pkl', 'w') as f:
+                pickle.dump(wide, f)
+
+            with open(out_fname + '.csv', 'w') as f:
+                writer = csv.writer(f)
+                writer.writerow((
+                    'SIC4_cd', 'SIC4_desc', 'ind_cd', 'ind_desc',
+                    'maj_cd', 'maj_desc', 'div_cd', 'div_desc'))
+                writer.writerows(wide)
+
+    return True
+
+get_sic_all()
