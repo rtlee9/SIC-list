@@ -59,9 +59,10 @@ def get_divisions():
     return divisions
 
 
-def get_major(url):
+def get_major(url_ext):
 
     # Read site
+    url = 'https://www.osha.gov/pls/imis/' + url_ext
     page = urllib2.urlopen(url).read()
     soup = BeautifulSoup(page, 'html5lib')
 
@@ -124,8 +125,7 @@ def save_all_majors(fname_prepend='Maj_'):
     for d in divisions:
         desc = clean_desc(d.full_desc)
         if desc[1] == 'Major Group':
-            ulr = 'https://www.osha.gov/pls/imis/' + d.link
             filename = fname_prepend + desc[0] + '.pkl'
-            save_majors(ulr, fname=filename)
+            save_majors(d.link, fname=filename)
             file_list.append(filename)
     return file_list

@@ -4,7 +4,7 @@ from .context import scrape_sic_osha as scrape
 # Test get_major()
 class TestClass:
 
-    url = 'https://www.osha.gov/pls/imis/sic_manual.display?id=1&tab=group'
+    url = 'sic_manual.display?id=1&tab=group'
     major = scrape.get_major(url)
 
     def test_len(self):

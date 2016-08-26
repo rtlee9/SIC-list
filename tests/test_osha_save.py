@@ -14,7 +14,7 @@ class TestClass:
         assert not(os.path.isfile(test_fname))
 
     def test_save_maj(self):
-        url = 'https://www.osha.gov/pls/imis/sic_manual.display?id=1&tab=group'
+        url = 'sic_manual.display?id=1&tab=group'
         assert scrape.save_majors(url)
         assert os.path.isfile('majors_raw.pkl')
         test_fname = 'test_maj.pkl'
