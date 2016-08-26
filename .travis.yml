@@ -12,13 +12,12 @@ notifications:
 before_install:
   - pip install setuptools==25.2.0
 
-# command to install dependencies
 install:
   - pip install -r requirements.txt --download-cache $HOME/.pip-cache
   - pip install coveralls
 
-# command to run tests
 script:
+  - python get_sic.py
   - py.test --cov=scrape_sic tests/
   - flake8 --statistics --show-source --disable-noqa scrape_sic
 
