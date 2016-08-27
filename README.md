@@ -3,8 +3,7 @@
 [![Build Status](https://travis-ci.org/rtlee9/SIC-list.svg?branch=master)](https://travis-ci.org/rtlee9/SIC-list)
 [![Coverage Status](https://coveralls.io/repos/github/rtlee9/SIC-list/badge.svg?branch=)](https://coveralls.io/github/rtlee9/SIC-list?branch=)
 [![Code Climate](https://codeclimate.com/github/rtlee9/SIC-list/badges/gpa.svg)](https://codeclimate.com/github/rtlee9/SIC-list)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/rtlee9/SIC-list/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/rtlee9/SIC-list/?branch=master)
-[![license](https://img.shields.io/badge/license-Apache_License-blue.svg)](LICENSE)
+[![license](https://img.shields.io/badge/license-Apache_2.0-blue.svg)](LICENSE)
 [![PyPI](https://img.shields.io/badge/python-2.7-blue.svg)](https://www.python.org/download/releases/2.7/)
 
 This repo provides lists of four-digit SIC codes scraped from the websites of two government agencies: the [SEC](https://www.sec.gov/info/edgar/siccodes.htm) and [OSHA](https://www.osha.gov/pls/imis/sic_manual.html). The cleaned lists can be found [here](sec_combined.csv) and [here](osha_combined.csv), respectively, and refresh instructions can be found below.
@@ -21,7 +20,7 @@ SIC codes were once maintained and assigned by the US government. I've found tha
 | [Occupational Safety & Health Administration (OSHA)](https://www.osha.gov/pls/imis/sic_manual.html) | 1987 SIC manual | Unknown |
 | [U.S. Securities and Exchange Commission (SEC)](https://www.sec.gov/info/edgar/siccodes.htm) | No version provided, but the SEC website indicates the webpage was last modified January 25, 2015 | Used in [EDGAR](https://www.sec.gov/edgar/searchedgar/companysearch.html) electronic filings |
 
-The SIC codes that are provided by the SEC appear to align with those provided by OSHA upon an initial (and non-comprehensive) comparison; however, OSHA's SIC manual is more comprehensive -- it contains many more SIC codes than does the SEC's list.
+The SIC codes provided by the SEC [generally align](tests/compare_sic_lists.ipynb) with those provided by OSHA; however, OSHA's SIC manual is more comprehensive -- it contains many more SIC codes than does the SEC's list.
 
 ## Other sources
 
