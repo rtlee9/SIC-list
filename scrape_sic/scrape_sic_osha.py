@@ -26,6 +26,19 @@ def clean_desc(full_desc):
     return [code, code_type, code_desc]
 
 
+# Get parent element
+def get_parent(running_list, i, this_type, parent_type):
+    prior = running_list[i - 1]
+    if clean_desc(prior.full_desc)[1] == parent_type:
+        parent_desc = str(prior.full_desc)
+    elif clean_desc(prior.full_desc)[1] == this_type:
+        parent_desc = str(prior.parent_desc)
+    else:
+        err_msg = 'Unexpected code type: ' + prior
+        raise ValueError(err_msg)
+    return parent_desc
+
+
 def get_divisions():
 
     # Setup
@@ -46,13 +59,7 @@ def get_divisions():
         link = l.get('href').encode("utf-8")
 
         if (i > 0) & (clean_desc(full_desc)[1] == 'Major Group'):
-            prior = divisions[i - 1]
-            if clean_desc(prior.full_desc)[1] == 'Division':
-                parent_desc = str(prior.full_desc)
-            elif clean_desc(prior.full_desc)[1] == 'Major Group':
-                parent_desc = str(prior.parent_desc)
-            else:
-                raise ValueError('Unexpected code type')
+            parent_desc = get_parent(divisions, i, 'Major Group', 'Division')
         else:
             parent_desc = str(None)
         divisions.append(ind_group(full_desc, parent_desc, link))
@@ -90,14 +97,7 @@ def get_major(url_ext):
 
         # Get parent element
         if (i > 0) & (clean_desc(full_desc)[1] == 'SIC4'):
-            prior = majors[i - 1]
-            if clean_desc(prior.full_desc)[1] == 'Industry Group':
-                parent_desc = str(prior.full_desc)
-            elif clean_desc(prior.full_desc)[1] == 'SIC4':
-                parent_desc = str(prior.parent_desc)
-            else:
-                err_msg = 'Unexpected code type: ' + prior
-                raise ValueError(err_msg)
+            parent_desc = get_parent(majors, i, 'SIC4', 'Industry Group')
         else:
             parent_desc = major_desc
 
