@@ -2,7 +2,10 @@ checks:
     python:
         code_rating: true
         duplicate_code: true
-    javascript: true
+
+tools:
+    pylint:
+        python_version: 2
 
 filter:
     excluded_paths:
