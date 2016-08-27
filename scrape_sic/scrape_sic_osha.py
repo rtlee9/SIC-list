@@ -192,7 +192,7 @@ def get_sic_all(div_fname=None, maj_fnames=None, out_fname='osha_combined'):
         majors_all = []
         for f in maj_fnames:
             with open(f, 'rb') as f:
-                majors_all.extend(pickle.load())
+                majors_all.extend(pickle.load(f))
     else:
         majors_all = get_all_majors()
 
