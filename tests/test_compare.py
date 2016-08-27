@@ -28,6 +28,8 @@ len(sec)
 # Read benchmark data
 benchmark = pd.read_csv('tests/ref_list.csv')
 benchmark.columns = ['SIC4_cd', 'SIC4_desciption']
+benchmark_osha = pd.read_csv('tests/ref_osha_combined.csv')
+benchmark_sec = pd.read_csv('tests/ref_sec_combined.csv')
 
 
 # Test get_divisions()
@@ -85,3 +87,7 @@ class TestClass:
             match.append(match_ind)
 
         assert sum(match) / len(inner) > .98
+
+    def test_compare_orig(self):
+        assert osha.equals(benchmark_osha)
+        assert sec.equals(benchmark_sec)
