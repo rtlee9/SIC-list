@@ -6,7 +6,7 @@
 [![license](https://img.shields.io/badge/license-Apache_2.0-blue.svg)](LICENSE)
 [![PyPI](https://img.shields.io/badge/python-2.7-blue.svg)](https://www.python.org/download/releases/2.7/)
 
-This repo provides lists of four-digit SIC codes scraped from the websites of two government agencies: the [SEC](https://www.sec.gov/info/edgar/siccodes.htm) and [OSHA](https://www.osha.gov/pls/imis/sic_manual.html). The cleaned lists can be found [here](sec_combined.csv) and [here](osha_combined.csv), respectively, and refresh instructions can be found below.
+This repo provides lists of four-digit SIC codes scraped from the websites of two government agencies: the [SEC](https://www.sec.gov/info/edgar/siccodes.htm) and [OSHA](https://www.osha.gov/pls/imis/sic_manual.html). The cleaned lists can be downloaded [here](https://raw.githubusercontent.com/rtlee9/SIC-list/master/sec_combined.csv) and [here](https://raw.githubusercontent.com/rtlee9/SIC-list/master/osha_combined.csv), respectively, and refresh instructions can be found below.
 
 ## Background
 The Standard Industrial Classification (SIC) is a system used to classify businesses by their primary business activity, or industry. The SIC system was created in the 1930's and has since been [replaced](https://www.census.gov/eos/www/naics/faqs/faqs.html#q8) as the industry classification system for Federal statistical agencies; however, it is still widely used by many businesses and by some government agencies.
