@@ -4,6 +4,7 @@ import csv
 import warnings
 
 
+# Scrape SIC codes from SEC website
 def get_sic_sec():
 
     # Setup
@@ -28,6 +29,7 @@ def get_sic_sec():
     return data
 
 
+# Save scraped SIC codes to local machine
 def save_sic_sec(out_fname='sec_combined.csv'):
     data = get_sic_sec()
     with open(out_fname, 'wb') as myfile:
