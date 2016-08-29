@@ -1,9 +1,9 @@
+# Test get_sic_all() function
 from .context import scrape_sic_osha as scrape
 import pandas as pd
 import pickle
 
 
-# Test get_divisions()
 class TestClass:
 
     filename = 'test'

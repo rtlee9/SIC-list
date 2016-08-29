@@ -1,7 +1,7 @@
+# Test get_divisions() function
 from .context import scrape_sic_osha as scrape
 
 
-# Test get_divisions()
 class TestClass:
 
     divisions = scrape.get_divisions()

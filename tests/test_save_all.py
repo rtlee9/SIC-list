@@ -1,3 +1,4 @@
+# Test save_all_majors() function
 import os
 from .context import scrape_sic_osha as scrape
 

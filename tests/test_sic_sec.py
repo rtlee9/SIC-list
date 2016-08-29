@@ -1,3 +1,4 @@
+# Test SEC scraping functions
 import os
 import pandas as pd
 from .context import scrape_sic_sec as scrape
@@ -5,7 +6,6 @@ from .context import scrape_sic_sec as scrape
 
 class TestClass:
 
-    # Test scrape
     out_name = 'test.csv'
     data = scrape.save_sic_sec(out_name)
     output_read = pd.read_csv(out_name)
@@ -24,18 +24,18 @@ class TestClass:
 
     def test_5122(self):
         assert self.df[pd.to_numeric(
-            self.df.SIC4_cd, errors='coerce') == 8071].industry_title.iloc[0] == \
-            'SERVICES-MEDICAL LABORATORIES'
+            self.df.SIC4_cd, errors='coerce') == 8071].\
+            industry_title.iloc[0] == 'SERVICES-MEDICAL LABORATORIES'
 
     def test_0800(self):
         assert self.df[pd.to_numeric(
-            self.df.SIC4_cd, errors='coerce') == 800].industry_title.iloc[0] == \
-            'FORESTRY'
+            self.df.SIC4_cd, errors='coerce') == 800].\
+            industry_title.iloc[0] == 'FORESTRY'
 
     def test_3540(self):
         assert self.df[pd.to_numeric(
-            self.df.SIC4_cd, errors='coerce') == 3540].industry_title.iloc[0] == \
-            'METALWORKG MACHINERY & EQUIPMENT'
+            self.df.SIC4_cd, errors='coerce') == 3540].\
+            industry_title.iloc[0] == 'METALWORKG MACHINERY & EQUIPMENT'
 
     # Clean up
     os.remove(out_name)

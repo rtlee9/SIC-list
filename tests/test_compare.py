@@ -1,3 +1,4 @@
+# Test output by comparing SIC descriptions across sources
 from __future__ import division
 from .context import scrape_sic_osha as scrape_osha
 from .context import scrape_sic_sec as scrape_sec
@@ -32,7 +33,6 @@ benchmark_osha = pd.read_csv('tests/ref_osha_combined.csv')
 benchmark_sec = pd.read_csv('tests/ref_sec_combined.csv')
 
 
-# Test get_divisions()
 class TestClass:
 
     def test_compare_osha_sec(self):

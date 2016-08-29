@@ -1,8 +1,8 @@
+# Test clean_desc() helper function
 import pytest
 from .context import scrape_sic_osha as scrape
 
 
-# Test clean_desc()
 class TestClass:
 
     def test_none(self):

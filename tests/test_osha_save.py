@@ -1,3 +1,4 @@
+# Test save_divisions() and save_majors() functions
 from .context import scrape_sic_osha as scrape
 import os
 

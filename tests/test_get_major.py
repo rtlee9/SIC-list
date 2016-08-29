@@ -1,7 +1,7 @@
+# Test get_major() function
 from .context import scrape_sic_osha as scrape
 
 
-# Test get_major()
 class TestClass:
 
     url = 'sic_manual.display?id=1&tab=group'

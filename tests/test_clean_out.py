@@ -1,12 +1,8 @@
+# Test clean_out() helper function
 from .context import scrape_sic_osha as scrape
 
 
-# Test get_divisions()
 class TestClass:
-
-    divisions = scrape.get_divisions()
-    url = 'sic_manual.display?id=1&tab=group'
-    major = scrape.get_major(url)
 
     def test_forestry(self):
         test_unit = scrape.ind_group(
