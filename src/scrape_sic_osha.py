@@ -1,16 +1,15 @@
-from bs4 import BeautifulSoup
-import urllib2
-from collections import namedtuple
+from os import path
 import pickle
 import csv
 
-# Create named tuple to store scraped data
-ind_group = namedtuple('ind_group', [
-    'full_desc', 'parent_desc', 'link'])
+import config
+from type import ind_group
+from soup import get_soup
 
 
-# Parse full OSHA industry description into industry code, type and description
 def clean_desc(full_desc):
+    """Parse full OSHA industry description into industry code, type and description
+    """
 
     # OSHA descriptions are delimated by colons
     full_desc_split = full_desc.split(': ')
@@ -36,11 +35,12 @@ def clean_desc(full_desc):
     return [code, code_type, code_desc]
 
 
-# Get the description of an industry group's parent
-# OSHA industry decriptions are provided in ordered lists;
-# this function identifies the parent industry group based
-# on information provided by the groups preceeding it
 def get_parent(running_list, i, this_type, parent_type):
+    """Get the description of an industry group's parent
+    OSHA industry decriptions are provided in ordered lists;
+    this function identifies the parent industry group based
+    on information provided by the groups preceeding it
+    """
 
     prior = running_list[i - 1]
 
@@ -59,16 +59,14 @@ def get_parent(running_list, i, this_type, parent_type):
 
     return parent_desc
 
-
-# Scrape the list of divisions and major groups from the OSHA website
-#   Divisions are the broadest grouping of SIC codes provided by OSHA
-#   Major groups are the second broadest grouping of SIC codes provided by OSHA
 def get_divisions():
+    """Scrape the list of divisions and major groups from the OSHA website
+    Divisions are the broadest grouping of SIC codes provided by OSHA
+    Major groups are the second broadest grouping of SIC codes provided by OSHA
+    """
 
     # Read site
-    url = 'https://www.osha.gov/pls/imis/sic_manual.html'
-    page = urllib2.urlopen(url).read()
-    soup = BeautifulSoup(page, 'html5lib')
+    soup = get_soup(config.OSHA_base_url + 'sic_manual.html')
 
     # Find content
     container = soup.select('div#maincontain')[0]
@@ -96,17 +94,16 @@ def get_divisions():
     return divisions
 
 
-# Scrape the list of major groups, industry groups and SIC four-digit SIC codes
-# from the OSHA website
-#   Major groups are the second broadest grouping of SIC codes provided by OSHA
-#   Industry groups are the third broadest grouping (least granular) of SIC
-#   codes provided by OSHA
 def get_major(url_ext):
+    """Scrape the list of major groups, industry groups and SIC four-digit SIC codes
+    from the OSHA website
+    Major groups are the second broadest grouping of SIC codes provided by OSHA
+    Industry groups are the third broadest grouping (least granular) of SIC
+    codes provided by OSHA
+    """
 
     # Read site
-    url = 'https://www.osha.gov/pls/imis/' + url_ext
-    page = urllib2.urlopen(url).read()
-    soup = BeautifulSoup(page, 'html5lib')
+    soup = get_soup(config.OSHA_base_url + url_ext)
 
     # Isolate relevant content
     container = soup.select('div#maincontain')[0]
@@ -145,10 +142,11 @@ def get_major(url_ext):
     return majors
 
 
-# Get and append descriptions for SIC codes and industry groups for all
-# major groups; links to the individual pages can be found from the manual
-# landing page
 def get_all_majors():
+    """Get and append descriptions for SIC codes and industry groups for all
+    major groups; links to the individual pages can be found from the manual
+    landing page
+    """
 
     # Get a links to more granular descriptions from the landing page
     divisions = get_divisions()
@@ -165,27 +163,30 @@ def get_all_majors():
     return majors_all
 
 
-# Save a pickled copy of the division (high-level) descriptions,
-# and return the raw data
 def save_divisions(fname='divisions_raw.pkl'):
+    """Save a pickled copy of the division (high-level) descriptions,
+    and return the raw data
+    """
     divisions = get_divisions()
     with open(fname, 'w') as f:
         pickle.dump(divisions, f)
     return divisions
 
 
-# Save a pickled copy of the descriptions for children of a given major group;
-# major group must be identified by a url, and return the raw data
 def save_majors(url, fname='majors_raw.pkl'):
+    """Save a pickled copy of the descriptions for children of a given major group;
+    major group must be identified by a url, and return the raw data
+    """
     majors = get_major(url)
     with open(fname, 'w') as f:
         pickle.dump(majors, f)
     return majors
 
 
-# Save pickled copies of the descriptions for children of all major groups,
-# and return a list of all saved files
 def save_all_majors(fname_prepend='Maj_'):
+    """Save pickled copies of the descriptions for children of all major groups,
+    and return a list of all saved files
+    """
 
     # Get a links to more granular descriptions from the landing page
     divisions = get_divisions()
@@ -203,17 +204,19 @@ def save_all_majors(fname_prepend='Maj_'):
     return file_list
 
 
-# Helper function: return a list of the industry code and description,
-# given a full description
 def clean_out(unit):
+    """Helper function: return a list of the industry code and description,
+    given a full description
+    """
     fdesc = clean_desc(unit.full_desc)
     cd = fdesc[0]
     desc = fdesc[2]
     return [cd, desc]
 
 
-# Combine all datasets into a single, wide data table
 def combine_sic_all(divisions, majors_all):
+    """Combine all datasets into a single, wide data table
+    """
 
     # Create combined table, long format
     combined = list(majors_all)
@@ -244,8 +247,9 @@ def combine_sic_all(divisions, majors_all):
     return wide
 
 
-# Wrapper for combine_sic_all function -- save wide dataset to local machine
 def get_sic_all(div_fname=None, maj_fnames=None, out_fname='osha_combined'):
+    """Combine all levels of SIC codes into a single flat file and save to disk
+    """
 
     # Get divisions if file not provided
     if div_fname:
@@ -272,10 +276,11 @@ def get_sic_all(div_fname=None, maj_fnames=None, out_fname='osha_combined'):
     # Save data in csv format
     with open(out_fname + '.csv', 'w') as f:
         writer = csv.writer(f)
-        writer.writerow((
-            'SIC4_cd', 'SIC4_desc', 'ind_cd', 'ind_desc',
-            'maj_cd', 'maj_desc', 'div_cd', 'div_desc'))
+        writer.writerow(config.OSHA_columns)
         writer.writerows(wide)
 
     # Return success confirmation
     return True
+
+if __name__ == '__main__':
+    get_sic_all(out_fname=path.join(config.path_data, 'osha_combined'))

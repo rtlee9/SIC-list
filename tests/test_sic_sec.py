@@ -1,12 +1,14 @@
 # Test SEC scraping functions
-import os
+from os import remove, path
 import pandas as pd
+
 from .context import scrape_sic_sec as scrape
+from .context import path_test
 
 
 class TestClass:
 
-    out_name = 'test.csv'
+    out_name = path.join(path_test, 'test.csv')
     data = scrape.save_sic_sec(out_name)
     output_read = pd.read_csv(out_name)
     df = pd.DataFrame(data)
@@ -38,4 +40,4 @@ class TestClass:
             industry_title.iloc[0] == 'METALWORKG MACHINERY & EQUIPMENT'
 
     # Clean up
-    os.remove(out_name)
+    remove(out_name)

@@ -1,5 +1,7 @@
 *.swp
 *.pkl
+HTML_copies/
+data/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

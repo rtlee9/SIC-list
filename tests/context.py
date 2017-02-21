@@ -1,8 +1,7 @@
-# -*- coding: utf-8 -*-
-
 import sys
-import os
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../scrape_sic')))
+from os import path
+sys.path.insert(0, path.join(path.dirname(path.dirname(__file__)), 'src'))
 
 import scrape_sic_sec
 import scrape_sic_osha
+path_test = path.dirname(path.abspath(__file__))

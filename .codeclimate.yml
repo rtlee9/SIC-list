@@ -11,10 +11,9 @@ engines:
 
 ratings:
   paths:
-  - scrape_sic/**
+  - src/**
 
 exclude_paths:
 - tests/**/*
 - venv/**/*
-- HTML_copies/**/*
 - "**/vendor/**/*"

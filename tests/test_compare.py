@@ -1,36 +1,39 @@
 # Test output by comparing SIC descriptions across sources
 from __future__ import division
-from .context import scrape_sic_osha as scrape_osha
-from .context import scrape_sic_sec as scrape_sec
 import pandas as pd
 import nltk
+from os import path, remove
+
+from .context import scrape_sic_osha as scrape_osha
+from .context import scrape_sic_sec as scrape_sec
+from .context import path_test
 
 nltk.download('punkt')
 nltk.download('averaged_perceptron_tagger')
 
 # Read OSHA data
-osha_fname = 'osha_combined.csv'
-try:
-    osha = pd.read_csv(osha_fname)
-except IOError:
-    scrape_osha.get_sic_all()
-    osha = pd.read_csv(osha_fname)
+osha_fname = path.join(path_test, 'osha_combined')
+if path.isfile(osha_fname + '.csv'):
+    osha = pd.read_csv(osha_fname + '.csv')
+else:
+    scrape_osha.get_sic_all(out_fname=osha_fname)
+    osha = pd.read_csv(osha_fname + '.csv')
 len(osha)
 
 # Read SEC data
-sec_fname = 'sec_combined.csv'
-try:
+sec_fname = path.join(path_test, 'sec_combined.csv')
+if path.isfile(sec_fname):
     sec = pd.read_csv(sec_fname)
-except IOError:
-    scrape_sec.save_sic_sec()
+else:
+    scrape_sec.save_sic_sec(sec_fname)
     sec = pd.read_csv(sec_fname)
 len(sec)
 
 # Read benchmark data
-benchmark = pd.read_csv('tests/ref_list.csv')
+benchmark = pd.read_csv(path.join(path_test, 'ref_list.csv'))
 benchmark.columns = ['SIC4_cd', 'SIC4_desciption']
-benchmark_osha = pd.read_csv('tests/ref_osha_combined.csv')
-benchmark_sec = pd.read_csv('tests/ref_sec_combined.csv')
+benchmark_osha = pd.read_csv(path.join(path_test, 'ref_osha_combined.csv'))
+benchmark_sec = pd.read_csv(path.join(path_test, 'ref_sec_combined.csv'))
 
 
 class TestClass:
@@ -91,3 +94,7 @@ class TestClass:
     def test_compare_orig(self):
         assert osha.equals(benchmark_osha)
         assert sec.equals(benchmark_sec)
+
+    remove(osha_fname + '.csv')
+    remove(osha_fname + '.pkl')
+    remove(sec_fname)
