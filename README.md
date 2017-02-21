@@ -37,7 +37,7 @@ The latest data can be found in the root directory. To refresh:
 
 1. Install Python 2.7
 1. Install python requirements: `$ pip install -r requirements.txt`
-1. From the command line run `$ python get_sic.py`
+1. From the command line run `$ python src/main.py`
 
 ## License
-[Apache License 2.0](http://choosealicense.com/licenses/apache-2.0/)
+[Apache License 2.0](LICENSE)
