@@ -6,8 +6,9 @@ import config
 from soup import get_soup
 
 
-# Scrape SIC codes from SEC website
 def get_sic_sec():
+    """Scrape SIC codes from SEC website
+    """
 
     # Setup
     soup = get_soup(config.SEC_base_url)
@@ -30,8 +31,9 @@ def get_sic_sec():
     return data
 
 
-# Save scraped SIC codes to local machine
 def save_sic_sec(out_fname='sec_combined.csv'):
+    """Save scraped SIC codes to local machine
+    """
     data = get_sic_sec()
     with open(out_fname, 'wb') as myfile:
         wr = csv.writer(myfile, quoting=csv.QUOTE_ALL)
