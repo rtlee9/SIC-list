@@ -1,12 +1,10 @@
-from bs4 import BeautifulSoup
-import urllib2
-from collections import namedtuple
+from os import path
 import pickle
 import csv
 
-# Create named tuple to store scraped data
-ind_group = namedtuple('ind_group', [
-    'full_desc', 'parent_desc', 'link'])
+import config
+from type import ind_group
+from soup import get_soup
 
 
 # Parse full OSHA industry description into industry code, type and description
@@ -59,16 +57,13 @@ def get_parent(running_list, i, this_type, parent_type):
 
     return parent_desc
 
-
 # Scrape the list of divisions and major groups from the OSHA website
 #   Divisions are the broadest grouping of SIC codes provided by OSHA
 #   Major groups are the second broadest grouping of SIC codes provided by OSHA
 def get_divisions():
 
     # Read site
-    url = 'https://www.osha.gov/pls/imis/sic_manual.html'
-    page = urllib2.urlopen(url).read()
-    soup = BeautifulSoup(page, 'html5lib')
+    soup = get_soup(config.OSHA_base_url + 'sic_manual.html')
 
     # Find content
     container = soup.select('div#maincontain')[0]
@@ -104,9 +99,7 @@ def get_divisions():
 def get_major(url_ext):
 
     # Read site
-    url = 'https://www.osha.gov/pls/imis/' + url_ext
-    page = urllib2.urlopen(url).read()
-    soup = BeautifulSoup(page, 'html5lib')
+    soup = get_soup(config.OSHA_base_url + url_ext)
 
     # Isolate relevant content
     container = soup.select('div#maincontain')[0]
@@ -272,10 +265,11 @@ def get_sic_all(div_fname=None, maj_fnames=None, out_fname='osha_combined'):
     # Save data in csv format
     with open(out_fname + '.csv', 'w') as f:
         writer = csv.writer(f)
-        writer.writerow((
-            'SIC4_cd', 'SIC4_desc', 'ind_cd', 'ind_desc',
-            'maj_cd', 'maj_desc', 'div_cd', 'div_desc'))
+        writer.writerow(config.OSHA_columns)
         writer.writerows(wide)
 
     # Return success confirmation
     return True
+
+if __name__ == '__main__':
+    get_sic_all(out_fname=path.join(config.path_data, 'osha_combined'))

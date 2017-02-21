@@ -1,12 +1,15 @@
 # Test get_sic_all() function
-from .context import scrape_sic_osha as scrape
 import pandas as pd
 import pickle
+from os import remove, path
+
+from .context import scrape_sic_osha as scrape
+from .context import path_test
 
 
 class TestClass:
 
-    filename = 'test'
+    filename = path.join(path_test, 'test')
     success = scrape.get_sic_all(out_fname=filename)
     with open(filename + '.pkl', 'rb') as f:
         out_pick = pickle.load(f)
@@ -87,3 +90,6 @@ class TestClass:
             'Nonclassifiable Establishments',
             'J',
             'Public Administration']
+
+    remove(filename + '.csv')
+    remove(filename + '.pkl')

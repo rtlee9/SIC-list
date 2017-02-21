@@ -1,16 +1,16 @@
-from bs4 import BeautifulSoup
-import urllib2
+from os import path
 import csv
 import warnings
+
+import config
+from soup import get_soup
 
 
 # Scrape SIC codes from SEC website
 def get_sic_sec():
 
     # Setup
-    url = 'https://www.sec.gov/info/edgar/siccodes.htm'
-    page = urllib2.urlopen(url).read()
-    soup = BeautifulSoup(page, 'lxml')
+    soup = get_soup(config.SEC_base_url)
     table = soup.find_all('table')[3]
 
     # Convert HTML to nested list
@@ -22,9 +22,10 @@ def get_sic_sec():
             data.append([ele.encode('utf-8') for ele in cols if ele])
 
     # Clean headers
-    if data[0] != ['SICCode', 'A/D \xc2\xa0Office', 'Industry Title']:
-        warnings.warn('Warning: column names have changed in ULR ' + url)
-    data[0] = ['SIC4_cd', 'AD_office', 'industry_title']
+    if data[0] != config.SEC_expected_columns:
+        warnings.warn(
+            'Warning: column names have changed in URL ' + config.SEC_base_url)
+    data[0] = config.SEC_columns
 
     return data
 
@@ -36,3 +37,6 @@ def save_sic_sec(out_fname='sec_combined.csv'):
         wr = csv.writer(myfile, quoting=csv.QUOTE_ALL)
         wr.writerows(data)
     return data
+
+if __name__ == '__main__':
+    save_sic_sec(path.join(config.path_data, 'sec_combined.csv'))
