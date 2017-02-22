@@ -10,6 +10,7 @@ tools:
 filter:
     excluded_paths:
         - '*/test/*'
+        - '*/notebooks/*'
         - '*.min.js'
         - 'venv/*'
         - 'HTML_copies/*'
