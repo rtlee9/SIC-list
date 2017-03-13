@@ -15,7 +15,6 @@ before_install:
 install:
   - pip install -r requirements.txt --download-cache $HOME/.pip-cache
   - pip install coveralls
-  - mkdir data
 
 script:
   - python src/main.py
