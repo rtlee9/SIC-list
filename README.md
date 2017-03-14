@@ -20,7 +20,7 @@ SIC codes were once maintained and assigned by the US government. I've found tha
 | [Occupational Safety & Health Administration (OSHA)](https://www.osha.gov/pls/imis/sic_manual.html) | 1987 SIC manual | Unknown |
 | [U.S. Securities and Exchange Commission (SEC)](https://www.sec.gov/info/edgar/siccodes.htm) | No version provided, but the SEC website indicates the webpage was last modified January 25, 2015 | Used in [EDGAR](https://www.sec.gov/edgar/searchedgar/companysearch.html) electronic filings |
 
-The SIC codes provided by the SEC [generally align](tests/compare_sic_lists.ipynb) with those provided by OSHA; however, OSHA's SIC manual is more comprehensive -- it contains many more SIC codes than does the SEC's list.
+The SIC codes provided by the SEC generally align with those provided by OSHA; however, OSHA's SIC manual is more comprehensive -- it contains many more SIC codes than does the SEC's list.
 
 ## Other sources
 
